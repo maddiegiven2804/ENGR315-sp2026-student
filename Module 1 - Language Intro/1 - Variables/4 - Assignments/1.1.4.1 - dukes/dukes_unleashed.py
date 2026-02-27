@@ -10,6 +10,17 @@ Note: this problem does not require the "compounding interest" formula from the 
 
 ### Your code here ###
 
-in_state_gift = 0
+### Annuual cost of attendance ###
+in_state_cost = 32248
+out_of_state_cost = 49482 
 
-out_state_gift = 0
+### Rate of return ###
+rate_of_return = 0.05
+
+### Calculations ###
+in_state_gift = in_state_cost / rate_of_return
+
+out_state_gift = out_of_state_cost / rate_of_return 
+
+print(in_state_gift)
+print(out_state_gift)

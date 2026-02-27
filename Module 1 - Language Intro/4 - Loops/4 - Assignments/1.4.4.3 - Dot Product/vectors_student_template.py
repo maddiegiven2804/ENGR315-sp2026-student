@@ -26,7 +26,8 @@ Step 2: Iterate through the vector(s) and calculate the dot product
 
 # store your result here. Do not change the name
 dot_product = 0
-
+for i in range(len(vector_a)):
+    dot_product += vector_a[i] * vector_b[i]
 ### Your code here
 
 """
