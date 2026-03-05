@@ -60,7 +60,15 @@ def calculate_stress(force, sample_diameter):
     :return: An array of stresses experienced by the sample in Kilo Pascals (MPa)
     """
 
-    ### YOUR SOLUTION FROM STEP 1 TEMPLATE HERE ###
+     # calculate the cross-section area (mm^2)
+    radius = sample_diameter / 2
+    Area = math.pi * radius**2 
+    Force_newtons = force * 1000
+
+    # calculate stress (MPa) from load (kN) and cross-sectional area
+    stress = Force_newtons / Area
+
+    return stress
 
     return None
 
@@ -76,10 +84,10 @@ def calculate_max_strength_strain(strain, stress):
     """
 
     # calculate the maximum stress experienced
-    ultimate_tensile_stress = -1
+    ultimate_tensile_stress = np.max(stress)
 
     # calculate the maximum strain experienced
-    fracture_strain = -1
+    fracture_strain = np.max(strain)
 
     return ultimate_tensile_stress, fracture_strain
 
