@@ -66,18 +66,55 @@ def first_question(data):
     :return:
     """
 
-    # your code here
-    return
+    for (date, county, state, flips, cases, deaths) in data: 
+
+        if county == 'Rockingham' and state == 'Virginia' and cases > 0:
+            print('First Case in Rockingham County', date) 
+            break
+
+    for (date, county, state, flips, cases, deaths) in data: 
+        if county == 'Harrisonburg city' and state == 'Virginia' and cases > 0:
+            print('First Case in Harrisonburg', date)
+            break
+
+    return 
 
 def second_question(data):
     """
     # Write code to address the following question: Use print() to display your responses.
     # What day was the greatest number of new daily cases recorded in Harrisonburg?
     # What day was the greatest number of new daily cases recorded in Rockingham County?
-    :return:
+    :return:    
     """
+    max_rocking = 0
+    previous_rocking = None
+    max_harris = 0
+    previous_harris = None
 
-    # your code here
+
+    for (date, county, state, flips, cases, deaths) in data: 
+        if county == 'Rockingham' and state == 'Virginia': 
+            if previous_rocking is not None:
+                Rise_in_cases = int(cases) - previous_rocking
+
+                if Rise_in_cases > max_rocking:
+                    max_rocking = Rise_in_cases 
+                    rock_date = date
+            previous_rocking = int(cases)
+
+    for (date, county, state, flips, cases, deaths) in data: 
+        if county == 'Harrisonburg city' and state == 'Virginia':
+            if previous_harris is not None: 
+                Rise_in_cases = int(cases) - previous_harris
+            
+                if Rise_in_cases > max_harris:
+                    max_harris = Rise_in_cases
+                    hburg_date = date
+            previous_harris = int(cases)
+            
+    print('Day with the highest new cases in Harrisonburg is', hburg_date) 
+    print('Day with the highest new cases in Rockingham is', rock_date)  
+ 
     return
 
 def third_question(data):
@@ -88,14 +125,34 @@ def third_question(data):
     :return:
     """
     
-    # your code here
+    # Rockingham 
+    max_rocking = 0 
+    previous_rocking = None
+    max_cases = []
+
+    for (date, county, state, flips, cases, deaths) in data: 
+        if county == 'Rockingham' and state == 'Virginia': 
+            if previous_rocking is not None:
+                max_cases.append((date, int(cases) - previous_rocking))
+        previous_rocking = int(cases)
+
+    for i in range(len(max_cases) - 6): 
+        week_sum = sum(cases for (date, cases) in max_cases[i: i + 7])
+        if week_sum > max_rocking:
+            max_rocking = week_sum
+            date1 = max_cases[i][0]
+            date2 = max_cases[i + 6][0]
+
+    print("The range of the dates is " + date1 + "-" + date2)
+
+
     return
 
 if __name__ == "__main__":
     data = parse_nyt_data('us-counties.csv')
 
-    for (date,county, state, fips, cases, deaths) in data:
-        print('On ', date, ' in ', county, ' ', state, ' there were ', cases, ' cases and ', deaths, ' deaths')
+ ##   for (date,county, state, fips, cases, deaths) in data:
+  ##      print('On ', date, ' in ', county, ' ', state, ' there were ', cases, ' cases and ', deaths, ' deaths')
 
 
     # write code to address the following question: Use print() to display your responses.
