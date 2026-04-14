@@ -28,23 +28,23 @@ normal_samples = np.random.normal(loc=desired_mu, scale=desired_std, size=num_sa
 """
 Step #2: Find the Mean and Standard Deviation of the Random Sample
 """
-sample_mean = -1
-sample_std_dev = -1
+sample_mean = np.mean(normal_samples)
+sample_std_dev = np.std(normal_samples)
 
 """
 Step #3: Generate the x and y points for the plot for a normal distribution
 """
 
 # Hint: Remember the functions described in the examples, choose an appropriate range for x
-x = -1
-y = -1
+x = np.linspace(sample_mean - 4*sample_std_dev, sample_mean + 4*sample_std_dev, 1000)
+y = norm.pdf(x, loc=sample_mean, scale=sample_std_dev)
 
 """
 Step #4: Generate a plot for the Fitted Normal Distribution, include a title and axis labels
 """
 
-# Your Code Here #
-
+exp_x = -1
+exp_y = -1
 """
 Step 5: Compare your Fit against the true data
 """
@@ -75,7 +75,7 @@ Step #7: Create an Exponential Fit and pull out the Beta value
 """
 
 # Hint: Use the appropriate function for Exponential Fit
-(fit_loc, fit_scale) = None, None
+(fit_loc, fit_scale) = expon.fit(exponential_samples)
 
 # pull out beta from the fitted distribution
 fit_beta = -1
@@ -85,14 +85,18 @@ Step #8: Generate x and y from the Exponential Fit
 """
 
 # Hint: Remember the functions described in the examples, choose an appropriate range for x
-exp_x = -1
-exp_y = -1
+exp_x = np.linspace(start=0, stop=50, num=1000)
+exp_y = expon.pdf(exp_x, loc=fit_loc, scale=fit_scale)
 
 """
 Step #9: Generate a plot for the Fitted Exponential Distribution, include a title and axis labels
 """
 
-# Your Code Here #
+plt.figure()
+plt.plot(exp_x, exp_y, label='Fitted Exponential')
+plt.title('Fitted Exponential Distribution')
+plt.xlabel('x')
+plt.ylabel('Probability Density')
 
 """
 Step #10: Compare your Fit against the true data
